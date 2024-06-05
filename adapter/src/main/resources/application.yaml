@@ -1,0 +1,6 @@
+spring:
+  config:
+    import: 'file:./core/src/main/resources/application.yaml'
+
+services:
+

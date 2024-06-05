@@ -1,0 +1,5 @@
+rootProject.name = 'task'
+include 'api'
+include 'core'
+include 'notification'
+incude  'adapter'
