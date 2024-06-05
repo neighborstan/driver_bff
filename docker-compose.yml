@@ -1,8 +1,8 @@
 version: '3.3'
 services:
-  pg_price:
+  pg_tasks:
     image: postgis/postgis:15-3.3
-    container_name: pg_price
+    container_name: pg_tasks
     ports:
       - '5432:5432'
     environment:
