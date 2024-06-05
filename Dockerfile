@@ -1,4 +1,4 @@
-FROM gitlab.dellin.ru:5005/docker/origin/gradle:7.6.0-jdk19-alpine AS builder
+FROM gitlab.metasharks.ru:5005/docker/origin/gradle:7.6.0-jdk19-alpine AS builder
 COPY --chown=gradle:gradle . ./
 RUN gradle :api:bootJar :adapter:bootJar :notification:bootJar -g /home/gradle/cash --no-daemon
 
