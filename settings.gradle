@@ -1,5 +1,3 @@
-rootProject.name = 'task'
-include 'api'
+rootProject.name = 'driver_bff'
 include 'core'
-include 'notification'
-incude  'adapter'
+include 'task-backend'

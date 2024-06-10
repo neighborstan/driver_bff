@@ -17,8 +17,6 @@ services:
 #  keycloak:
 #    image: bitnami/keycloak:21.1.2
 #    container_name: 'keycloak'
-#    depends_on:
-#      - postgres
 #    volumes:
 #      - ./volumes/cacerts:/opt/bitnami/keycloak/certs-spi/cacerts
 #      - ./volumes/keycloak:/opt/bitnami/keycloak
@@ -36,7 +34,7 @@ services:
     restart: on-failure
     ports:
       - '8080:8080'
-    image: dellinii/driver-bff
+    image: driver-bff
     environment:
       - SPRING_CONFIG_LOCATION=/app/application.yml
     entrypoint:
@@ -52,7 +50,7 @@ services:
   driver-bff-notification:
     container_name: driver-bff-notification
     restart: on-failure
-    image: dellinii/driver-bff
+    image: driver-bff
     environment:
       - SPRING_CONFIG_LOCATION=/app/application.yml
     entrypoint:
@@ -65,10 +63,10 @@ services:
       - -jar
       - /app/driver-bff-notification.jar
 
-  driver-bff-adapter:
-    container_name: driver-bff-adapter
+  driver-bff-watcher:
+    container_name: driver-bff-watcher
     restart: on-failure
-    image: dellinii/driver-bff
+    image: driver-bff
     environment:
       - SPRING_CONFIG_LOCATION=/app/application.yml
     entrypoint:
@@ -79,4 +77,4 @@ services:
       - -Dconfig.override_with_env_vars=true
       - -Djava.security.egd=file:/dev/./urandom
       - -jar
-      - /app/driver-bff-adapter.jar
+      - /app/driver-bff-watcher.jar

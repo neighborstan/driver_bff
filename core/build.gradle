@@ -18,33 +18,33 @@ compileTestJava.options.encoding = 'UTF-8'
 
 //https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator-gradle-plugin
 //https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/spring.md
-tasks.create("openApiGenerateApi", GenerateTask.class, {
-    generatorName = "spring"
-    inputSpec = "$rootDir/api.yaml".toString()
-    outputDir = "$buildDir/generated/api".toString()
-    modelPackage = "saas.tasks.core.models"
-    apiPackage = "saas.tasks.core.controllers"
-//    modelNamePrefix = "Api"
-    removeOperationIdPrefix = true
-    skipOperationExample = true
-    skipValidateSpec = true
-    generateModelTests = false
-    generateApiTests = false
-    generateApiDocumentation = false
-    apiFilesConstrainedTo = [""]
-    modelFilesConstrainedTo = [""]
-    configOptions = [
-            dateLibrary         : "java8",
-            useBeanValidation   : "false",
-            sourceFolder        : "src/gen/java",
-            openApiNullable     : "false",
-//            useSpringController    : "true",
-            interfaceOnly       : "true",
-            skipDefaultInterface: "true",
-    ]
-    typeMappings = ['string+period': "Period"]
-    importMappings = [Period: "java.time.Period"]
-})
+//tasks.create("openApiGenerateApi", GenerateTask.class, {
+//    generatorName = "spring"
+//    inputSpec = "$rootDir/api.yaml".toString()
+//    outputDir = "$buildDir/generated/api".toString()
+//    modelPackage = "saas.tasks.core.models"
+//    apiPackage = "saas.tasks.core.controllers"
+////    modelNamePrefix = "Api"
+//    removeOperationIdPrefix = true
+//    skipOperationExample = true
+//    skipValidateSpec = true
+//    generateModelTests = false
+//    generateApiTests = false
+//    generateApiDocumentation = false
+//    apiFilesConstrainedTo = [""]
+//    modelFilesConstrainedTo = [""]
+//    configOptions = [
+//            dateLibrary         : "java8",
+//            useBeanValidation   : "false",
+//            sourceFolder        : "src/gen/java",
+//            openApiNullable     : "false",
+////            useSpringController    : "true",
+//            interfaceOnly       : "true",
+//            skipDefaultInterface: "true",
+//    ]
+//    typeMappings = ['string+period': "Period"]
+//    importMappings = [Period: "java.time.Period"]
+//})
 
 configurations {
     testAnnotationProcessor {
@@ -55,7 +55,7 @@ configurations {
     }
 }
 
-compileJava.dependsOn tasks.openApiGenerateApi
+//compileJava.dependsOn tasks.openApiGenerateApi
 
 sourceSets {
     main {
