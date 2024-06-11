@@ -1,11 +1,11 @@
-package saas.tasks.core.converters;
+package converters;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.stereotype.Component;
-import saas.tasks.core.models.Task;
-import saas.tasks.core.models.TaskDto;
+import models.Task;
+import models.TaskDto;
 
 @Component
 @Mapper(componentModel = "spring",

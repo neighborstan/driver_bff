@@ -101,6 +101,6 @@ allprojects {
 }
 
 
-group 'saas.tasks'
+group 'saas.driver-bff'
 version '1.0.0'
 

@@ -8,9 +8,9 @@ spring:
     change-log: 'classpath:db/changelog.xml'
     default-schema: 'public'
   datasource:
-    url: jdbc:postgresql://10.206.128.105:5000/tasks_demo
-    username: u_tasks_demo
-    password: Aegh4dee
+    url: jdbc:postgresql://10.206.128.105:5000/core
+    username: core_demo
+    password: core_demo
     driverClassName: org.postgresql.Driver
     hikari:
       schema: 'public'
@@ -19,5 +19,5 @@ spring:
 
 services:
   core:
-    url: https://core.demo.traffic.online
-    token: '{"user_id":"4fe0e967-19c5-4c99-9221-79d5da849646","roles":["admin"]}'
+    url: https://localhost
+#    token: '{"user_id":"4fe0e967-19c5-4c99-9221-79d5da849646","roles":["admin"]}'

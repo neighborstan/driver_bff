@@ -1,14 +1,14 @@
-package saas.tasks.core.services;
+package services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
-import saas.tasks.core.models.PolymorphMap;
-import saas.tasks.core.models.TaskDto;
-import saas.tasks.core.models.TaskEntity;
-import saas.tasks.core.models.TaskPayload;
+import models.PolymorphMap;
+import models.TaskDto;
+import entity.TaskEntity;
+import payload.TaskPayload;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -26,23 +26,28 @@ public class TaskRowMapper implements RowMapper<TaskDto<?, ?>> {
 
     @Override
     public TaskDto<?, ?> mapRow(ResultSet rs, int rowNum) throws SQLException {
-        try {
-            return new TaskDto<TaskEntity, TaskPayload>(
-                    rs.getObject("id", UUID.class),
-                    TaskDto.Type.valueOf(rs.getString("type")),
-                    TaskDto.Status.valueOf(rs.getString("status")),
-                    rs.getString("pipeline"),
-                    rs.getString("author"),
-                    mapper.readValue(rs.getString("story"), new TypeReference<List<TaskDto.Story>>() {}),
-                    rs.getTimestamp("transition").toInstant().atOffset(ZoneOffset.UTC),
-                    mapper.readValue(rs.getString("contacts"), new TypeReference<List<TaskDto.Contact>>() {}),
-                    new PolymorphMap<>(mapper.readValue(rs.getString("entity"), new TypeReference<Map<String, ?>>() {})),
-                    new PolymorphMap<>(mapper.readValue(rs.getString("payload"), new TypeReference<Map<String, ?>>() {})),
-                    rs.getString("comment")
-            );
-        }
-        catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
+        return null;
     }
+
+//    @Override
+//    public TaskDto<?, ?> mapRow(ResultSet rs, int rowNum) throws SQLException {
+//        try {
+//            return new TaskDto<TaskEntity, TaskPayload>(
+//                    rs.getObject("id", UUID.class),
+//                    TaskDto.Type.valueOf(rs.getString("type")),
+//                    TaskDto.Status.valueOf(rs.getString("status")),
+//                    rs.getString("pipeline"),
+//                    rs.getString("author"),
+//                    mapper.readValue(rs.getString("story"), new TypeReference<List<TaskDto.Story>>() {}),
+//                    rs.getTimestamp("transition").toInstant().atOffset(ZoneOffset.UTC),
+//                    mapper.readValue(rs.getString("contacts"), new TypeReference<List<TaskDto.Contact>>() {}),
+//                    new PolymorphMap<>(mapper.readValue(rs.getString("entity"), new TypeReference<Map<String, ?>>() {})),
+//                    new PolymorphMap<>(mapper.readValue(rs.getString("payload"), new TypeReference<Map<String, ?>>() {})),
+//                    rs.getString("comment")
+//            );
+//        }
+//        catch (IOException ex) {
+//            throw new RuntimeException(ex);
+//        }
+//    }
 }

@@ -1,4 +1,4 @@
-package saas.tasks.core.services;
+package services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -10,8 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import saas.tasks.core.exceptions.BadRequestException;
-import saas.tasks.core.models.Driver;
+import exceptions.BadRequestException;
+import models.Driver;
 
 import java.io.IOException;
 import java.util.Optional;

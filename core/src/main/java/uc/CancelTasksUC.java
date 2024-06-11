@@ -1,11 +1,11 @@
-package saas.tasks.core.uc;
+package uc;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import saas.tasks.core.models.Shipping;
-import saas.tasks.core.models.TaskDto;
-import saas.tasks.core.services.AssignmentService;
-import saas.tasks.core.services.TasksService;
+import models.Shipping;
+import models.TaskDto;
+import services.AssignmentService;
+import services.TasksService;
 
 import java.time.Clock;
 import java.time.OffsetDateTime;

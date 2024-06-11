@@ -1,9 +1,11 @@
-package saas.tasks.core.models;
+package models;
 
+import entity.TaskEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import payload.TaskPayload;
 
 import java.time.OffsetDateTime;
 import java.util.List;

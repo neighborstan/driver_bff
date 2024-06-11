@@ -1,4 +1,4 @@
-package saas.tasks.core.services;
+package services;
 
 import org.springframework.stereotype.Component;
 

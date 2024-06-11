@@ -1,4 +1,4 @@
-package saas.tasks.core.config;
+package config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,9 +16,9 @@ import java.time.Clock;
 
 @Configuration
 @ComponentScan({
-        "saas.tasks.core.uc",
-        "saas.tasks.core.services",
-        "saas.tasks.core.converters"
+        "uc",
+        "services",
+        "converters"
 })
 public class CoreConfig {
 

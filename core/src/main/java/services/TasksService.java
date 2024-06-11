@@ -1,4 +1,4 @@
-package saas.tasks.core.services;
+package services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
-import saas.tasks.core.models.TaskDto;
+import models.TaskDto;
 
 import java.io.IOException;
 import java.sql.Timestamp;

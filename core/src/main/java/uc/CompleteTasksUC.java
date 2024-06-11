@@ -1,17 +1,17 @@
-package saas.tasks.core.uc;
+package uc;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import saas.tasks.core.exceptions.BadRequestException;
-import saas.tasks.core.exceptions.ForbiddenException;
-import saas.tasks.core.exceptions.NotFoundException;
-import saas.tasks.core.models.TaskAssignmentDto;
-import saas.tasks.core.models.TaskDto;
-import saas.tasks.core.models.TaskEntity;
-import saas.tasks.core.models.TaskPayload;
-import saas.tasks.core.services.AssignmentService;
-import saas.tasks.core.services.TasksService;
+import exceptions.BadRequestException;
+import exceptions.ForbiddenException;
+import exceptions.NotFoundException;
+import models.TaskAssignmentDto;
+import models.TaskDto;
+import entity.TaskEntity;
+import payload.TaskPayload;
+import services.AssignmentService;
+import services.TasksService;
 
 import java.time.Clock;
 import java.time.OffsetDateTime;

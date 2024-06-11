@@ -1,9 +1,9 @@
-package saas.tasks.core.uc;
+package uc;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import saas.tasks.core.models.TaskDto;
-import saas.tasks.core.services.TasksService;
+import models.TaskDto;
+import services.TasksService;
 
 import java.util.List;
 

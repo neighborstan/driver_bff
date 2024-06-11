@@ -1,4 +1,4 @@
-package saas.tasks.core.exceptions;
+package exceptions;
 
 public class NotFoundException extends RuntimeException {
 
