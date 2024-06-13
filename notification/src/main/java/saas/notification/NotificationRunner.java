@@ -1,9 +1,9 @@
-package saas.tasks.notification;
+package saas.notification;
 
 import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import saas.tasks.notification.config.NotificationConfig;
+import saas.notification.config.NotificationConfig;
 
 
 @SpringBootApplication

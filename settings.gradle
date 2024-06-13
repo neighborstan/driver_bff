@@ -1,3 +1,4 @@
-rootProject.name = 'driver_bff'
+rootProject.name = 'driver-bff'
 include 'core'
-include 'task-backend'
+include 'tasks-backend'
+include 'notification'

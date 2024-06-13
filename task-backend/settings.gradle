@@ -1,5 +1,0 @@
-rootProject.name = 'tasks'
-include 'watcher'
-include 'api'
-include 'notification'
-
