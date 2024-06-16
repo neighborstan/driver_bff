@@ -20,13 +20,10 @@ compileTestJava.options.encoding = 'UTF-8'
 dependencies {
 
     implementation project(":commons")
-    implementation project(":tasks:core")
+    implementation project(":users:core")
 
     compileOnly "org.projectlombok:lombok"
     annotationProcessor "org.projectlombok:lombok"
-
-    implementation "ch.qos.logback:logback-classic"
-    implementation "io.sentry:sentry-logback"
 
     implementation "com.fasterxml.jackson.core:jackson-core"
     implementation "com.fasterxml.jackson.core:jackson-databind"

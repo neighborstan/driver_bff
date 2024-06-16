@@ -1,10 +1,10 @@
 spring:
   config:
-    import: 'file:tasks/core/src/main/resources/application.yaml'
+    import: 'file:users/core/src/main/resources/application.yaml'
   rabbitmq:
     host: 10.206.128.24
-    username: tasks-service
-    password: tasks-service
+    username: users-service
+    password: users-service
     virtual-host: /
     port: 5672
     listener:
@@ -17,5 +17,5 @@ spring:
 services:
   rabbit:
     exchange: TRAFFIC_EXCHANGE
-    queue: TASKS-QUEUE
+    queue: USERS-QUEUE
 

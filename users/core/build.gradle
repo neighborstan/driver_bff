@@ -41,11 +41,7 @@ dependencies {
     annotationProcessor "org.mapstruct:mapstruct-processor:1.5.3.Final"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
-    api "io.sentry:sentry-logback"
-    api "ch.qos.logback:logback-classic"
-
     implementation "org.postgresql:postgresql"
-    implementation "org.liquibase:liquibase-core"
 
     implementation "com.fasterxml.jackson.core:jackson-core"
     implementation "com.fasterxml.jackson.core:jackson-databind"
