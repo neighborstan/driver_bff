@@ -1,80 +1,83 @@
 version: '3.3'
+
 services:
+#  pg_price:
+#    extends:
+#      file: docker-compose.base.yml
+#      service: pg_price
+#
   pg_tasks:
-    image: postgis/postgis:15-3.3
     container_name: pg_tasks
-    ports:
-      - '5432:5432'
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=pass
-      - POSTGRES_DB=task
-      # Add extensions you need to be enabled by default in the DB. Default are the five specified below
-    #      - POSTGRES_MULTIPLE_EXTENSIONS=postgis,hstore,postgis_topology,postgis_raster,pgrouting
-    healthcheck:
-      test: "PGPASSWORD=pass pg_isready -h 127.0.0.1 -U user -d path_price"
+    extends:
+      file: docker-compose.base.yml
+      service: pg_tasks
+#
+#  pg_notification:
+#    extends:
+#      file: docker-compose.base.yml
+#      service: pg_notification
+#
+#  pg_incidents:
+#    extends:
+#      file: docker-compose.base.yml
+#      service: pg_incidents
+#
+  pg_users:
+    extends:
+      file: docker-compose.base.yml
+      service: pg_users
 
-#  keycloak:
-#    image: bitnami/keycloak:21.1.2
-#    container_name: 'keycloak'
-#    volumes:
-#      - ./volumes/cacerts:/opt/bitnami/keycloak/certs-spi/cacerts
-#      - ./volumes/keycloak:/opt/bitnami/keycloak
-#    env_file:
-#      - .env
-#    ports:
-#      - "8080:8443"
-#    restart: always
-#    networks:
-#      lan:
-#        ipv4_address: 172.26.0.11
+  rmq_price:
+    extends:
+      file: docker-compose.base.yml
+      service: rmq_price
 
-  driver-bff-api:
-    container_name: driver-bff-api
-    restart: on-failure
-    ports:
-      - '8080:8080'
-    image: driver-bff
-    environment:
-      - SPRING_CONFIG_LOCATION=/app/application.yml
-    entrypoint:
-      - java
-      - -XX:InitialRAMPercentage=75
-      - -XX:MaxRAMPercentage=75
-      - -Xss256k
-      - -Dconfig.override_with_env_vars=true
-      - -Djava.security.egd=file:/dev/./urandom
-      - -jar
-      - /app/driver-bff-api.jar
+#  tasks-core:
+#    extends:
+#      file: docker-compose.services.yml
+#      service: tasks-core
 
-  driver-bff-notification:
-    container_name: driver-bff-notification
-    restart: on-failure
-    image: driver-bff
-    environment:
-      - SPRING_CONFIG_LOCATION=/app/application.yml
-    entrypoint:
-      - java
-      - -XX:InitialRAMPercentage=75
-      - -XX:MaxRAMPercentage=75
-      - -Xss256k
-      - -Dconfig.override_with_env_vars=true
-      - -Djava.security.egd=file:/dev/./urandom
-      - -jar
-      - /app/driver-bff-notification.jar
+  tasks-api:
+    extends:
+      file: docker-compose.services.yml
+      service: tasks-api
 
-  driver-bff-watcher:
-    container_name: driver-bff-watcher
-    restart: on-failure
-    image: driver-bff
-    environment:
-      - SPRING_CONFIG_LOCATION=/app/application.yml
-    entrypoint:
-      - java
-      - -XX:InitialRAMPercentage=75
-      - -XX:MaxRAMPercentage=75
-      - -Xss256k
-      - -Dconfig.override_with_env_vars=true
-      - -Djava.security.egd=file:/dev/./urandom
-      - -jar
-      - /app/driver-bff-watcher.jar
+  tasks-watcher:
+    extends:
+      file: docker-compose.services.yml
+      service: tasks-watcher
+
+#  notification:
+#    extends:
+#      file: docker-compose.services.yml
+#      service: notification
+#
+#  incidents-core:
+#    extends:
+#      file: docker-compose.services.yml
+#      service: incidents-core
+#
+#  incidents-api:
+#    extends:
+#      file: docker-compose.services.yml
+#      service: incidents-api
+#
+#  incidents-watcher:
+#    extends:
+#      file: docker-compose.services.yml
+#      service: incidents-watcher
+#
+#  users-core:
+#    extends:
+#      file: docker-compose.services.yml
+#      service: users-core
+#
+  users-api:
+    extends:
+      file: docker-compose.services.yml
+      service: users-api
+
+  users-watcher:
+    extends:
+      file: docker-compose.services.yml
+      service: users-watcher
