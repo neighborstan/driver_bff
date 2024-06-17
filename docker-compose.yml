@@ -1,83 +1,112 @@
 version: '3.3'
 
 services:
-#  pg_price:
-#    extends:
-#      file: docker-compose.base.yml
-#      service: pg_price
-#
+  # ----- БД контейнеры -----
   pg_tasks:
-    container_name: pg_tasks
     extends:
       file: docker-compose.base.yml
-      service: pg_tasks
-#
-#  pg_notification:
-#    extends:
-#      file: docker-compose.base.yml
-#      service: pg_notification
-#
-#  pg_incidents:
-#    extends:
-#      file: docker-compose.base.yml
-#      service: pg_incidents
-#
+      service: pg_base
+    container_name: pg_tasks
+    ports:
+      - '5433:5432'
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=tasks_db
+    healthcheck:
+      test: "PGPASSWORD=pass pg_isready -h 127.0.0.1 -U user -d tasks_db"
+
+
   pg_users:
     extends:
       file: docker-compose.base.yml
-      service: pg_users
+      service: pg_base
+    container_name: pg_users
+    ports:
+      - '5434:5432'
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=users_db
+    healthcheck:
+      test: "PGPASSWORD=pass pg_isready -h 127.0.0.1 -U user -d users_db"
 
-  rmq_price:
+
+  pg_notification:
     extends:
       file: docker-compose.base.yml
-      service: rmq_price
+      service: pg_base
+    container_name: pg_notification
+    ports:
+      - '5435:5432'
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=notification_db
+    healthcheck:
+      test: "PGPASSWORD=pass pg_isready -h 127.0.0.1 -U user -d notification_db"
 
-#  tasks-core:
-#    extends:
-#      file: docker-compose.services.yml
-#      service: tasks-core
 
+  pg_incidents:
+    extends:
+      file: docker-compose.base.yml
+      service: pg_base
+    container_name: pg_incidents
+    ports:
+      - '5436:5432'
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=incidents_db
+    healthcheck:
+      test: "PGPASSWORD=pass pg_isready -h 127.0.0.1 -U user -d incidents_db"
+
+
+  rmq_bff:
+    extends:
+      file: docker-compose.base.yml
+      service: rmq_bff
+
+
+  # ----- Сервисы -----
   tasks-api:
     extends:
       file: docker-compose.services.yml
       service: tasks-api
+
 
   tasks-watcher:
     extends:
       file: docker-compose.services.yml
       service: tasks-watcher
 
-#  notification:
-#    extends:
-#      file: docker-compose.services.yml
-#      service: notification
-#
-#  incidents-core:
-#    extends:
-#      file: docker-compose.services.yml
-#      service: incidents-core
-#
-#  incidents-api:
-#    extends:
-#      file: docker-compose.services.yml
-#      service: incidents-api
-#
-#  incidents-watcher:
-#    extends:
-#      file: docker-compose.services.yml
-#      service: incidents-watcher
-#
-#  users-core:
-#    extends:
-#      file: docker-compose.services.yml
-#      service: users-core
-#
+
   users-api:
     extends:
       file: docker-compose.services.yml
       service: users-api
 
+
   users-watcher:
     extends:
       file: docker-compose.services.yml
       service: users-watcher
+
+
+#  notification:
+#    extends:
+#      file: docker-compose.services.yml
+#      service: notification
+
+
+#  incidents-api:
+#    extends:
+#      file: docker-compose.services.yml
+#      service: incidents-api
+
+
+#  incidents-watcher:
+#    extends:
+#      file: docker-compose.services.yml
+#      service: incidents-watcher
+

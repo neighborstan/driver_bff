@@ -1,68 +1,14 @@
 version: '3.3'
 services:
-  pg_price:
-    image: postgis/postgis:15-3.3
-    container_name: pg_price
-    ports:
-      - '5432:5432'
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=pass
-      - POSTGRES_DB=path_price
-    healthcheck:
-      test: "PGPASSWORD=pass pg_isready -h 127.0.0.1 -U user -d path_price"
-
-  pg_tasks:
+  # ----- БД образ-шаблон -----
+  pg_base:
     image: postgres:15
-    container_name: pg_tasks
-    ports:
-      - '5433:5432'
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=pass
-      - POSTGRES_DB=tasks_db
-    healthcheck:
-      test: "PGPASSWORD=pass pg_isready -h 127.0.0.1 -U user -d tasks_db"
+    container_name: pg_base
 
-  pg_notification:
-    image: postgres:15
-    container_name: pg_notification
-    ports:
-      - '5434:5432'
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=pass
-      - POSTGRES_DB=notification_db
-    healthcheck:
-      test: "PGPASSWORD=pass pg_isready -h 127.0.0.1 -U user -d notification_db"
 
-  pg_incidents:
-    image: postgres:15
-    container_name: pg_incidents
-    ports:
-      - '5435:5432'
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=pass
-      - POSTGRES_DB=incidents_db
-    healthcheck:
-      test: "PGPASSWORD=pass pg_isready -h 127.0.0.1 -U user -d incidents_db"
-
-  pg_users:
-    image: postgres:15
-    container_name: pg_users
-    ports:
-      - '5436:5432'
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=pass
-      - POSTGRES_DB=users_db
-    healthcheck:
-      test: "PGPASSWORD=pass pg_isready -h 127.0.0.1 -U user -d users_db"
-
-  rmq_price:
+  rmq_bff:
     image: rabbitmq:3.11.2-management
-    container_name: rmq_price
+    container_name: rmq_bff
     ports:
       - '5672:5672'
       - '15672:15672'
