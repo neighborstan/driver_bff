@@ -12,13 +12,18 @@ java {
     }
 }
 
+
 compileJava.options.encoding = 'UTF-8'
 compileTestJava.options.encoding = 'UTF-8'
 
+
 dependencies {
 
-    implementation project(":commons")
-    implementation project(":users:core")
+}
+
+dependencies {
+
+//    implementation "org.springframework.boot:spring-boot-starter-amqp"
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -43,6 +48,10 @@ test {
 }
 
 bootJar {
-    archiveFileName = "api.jar"
+    archiveFileName = "adaptertraffic.jar"
     exclude("application.yaml")
+}
+
+test {
+    useJUnitPlatform()
 }

@@ -18,7 +18,7 @@ compileTestJava.options.encoding = 'UTF-8'
 dependencies {
 
     implementation project(":commons")
-    implementation project(":users:core")
+    implementation project(":chat:core")
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
