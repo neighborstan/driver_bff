@@ -14,5 +14,4 @@ public class WatcherRunner {
                 .bannerMode(Banner.Mode.OFF)
                 .run(args);
     }
-
 }

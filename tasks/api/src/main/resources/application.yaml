@@ -4,7 +4,7 @@ server:
 
 spring:
   config:
-    import: 'file:./core/src/main/resources/application.yaml'
+    import: 'file:tasks/core/src/main/resources/application.yaml'
   security:
     oauth2:
       resourceserver:

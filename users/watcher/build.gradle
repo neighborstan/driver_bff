@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version "$springBootVersion"
+}
+
+group rootProject.group
+version rootProject.version
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+
+dependencies {
+
+    implementation project(":commons")
+    implementation project(":users:core")
+
+    compileOnly "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok"
+
+    implementation "com.fasterxml.jackson.core:jackson-core"
+    implementation "com.fasterxml.jackson.core:jackson-databind"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
+
+
+    implementation "org.springframework.boot:spring-boot-starter-amqp"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+bootJar {
+    archiveFileName = "watcher.jar"
+    exclude("application.yml")
+}

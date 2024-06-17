@@ -1,6 +1,6 @@
 spring:
   config:
-    import: 'file:./core/src/main/resources/application.yaml'
+    import: 'file:tasks/core/src/main/resources/application.yaml'
   rabbitmq:
     host: 10.206.128.24
     username: tasks-service

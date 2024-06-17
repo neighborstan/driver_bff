@@ -17,7 +17,8 @@ compileTestJava.options.encoding = 'UTF-8'
 
 dependencies {
 
-    implementation project(":commons")
+//    implementation project(":commons")
+    implementation project(":tasks:core")
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -42,7 +43,6 @@ test {
 }
 
 bootJar {
-    mainClass.set('tech.saas.tasks.watcher.ApiRunner')
     archiveFileName = "api.jar"
-    exclude("application.yml")
+    exclude("application.yaml")
 }

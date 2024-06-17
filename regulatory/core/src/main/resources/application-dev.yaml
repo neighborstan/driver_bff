@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5436/regulatory_db
+    username: user
+    password: pass

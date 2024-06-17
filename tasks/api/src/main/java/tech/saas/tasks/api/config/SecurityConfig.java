@@ -9,12 +9,12 @@ import org.springframework.http.ProblemDetail;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.net.URI;
 
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
@@ -25,12 +25,12 @@ public class SecurityConfig {
                                            ObjectMapper mapper,
                                            @Value("${server.error.path:${error.path:/error}}") String error) throws Exception {
 
-        return http
+        http
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
+                .sessionManagement(sessionManagement ->
+                        sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
                 .authorizeHttpRequests(authorize ->
                         authorize
                                 .requestMatchers(
@@ -42,30 +42,29 @@ public class SecurityConfig {
                                 .anyRequest()
                                 .authenticated()
                 )
-                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
-                .exceptionHandling(v -> {
-                            v.accessDeniedHandler((request, response, ex) -> {
-                                var status = HttpStatus.FORBIDDEN;
-                                response.setStatus(status.value());
-                                var body = ProblemDetail.forStatusAndDetail(status, ex.getMessage());
-                                body.setType(URI.create("traffic:exception"));
-                                body.setTitle(String.valueOf(status));
-
-                                response.sendError(status.value(), mapper.writeValueAsString(body));
-                            });
-                            v.authenticationEntryPoint((request, response, ex) -> {
-                                var status = HttpStatus.FORBIDDEN;
-                                response.setStatus(status.value());
-                                var body = ProblemDetail.forStatusAndDetail(status, ex.getMessage());
-                                body.setType(URI.create("traffic:exception"));
-                                body.setTitle(String.valueOf(status));
-
-                                response.sendError(status.value(), mapper.writeValueAsString(body));
-                            });
-                        }
+                .oauth2ResourceServer(oauth2 ->
+                        oauth2.jwt(withDefaults())
                 )
-                .build();
+                .exceptionHandling(exceptionHandling ->
+                        exceptionHandling.accessDeniedHandler((request, response, ex) -> {
+                            var status = HttpStatus.FORBIDDEN;
+                            response.setStatus(status.value());
+                            var body = ProblemDetail.forStatusAndDetail(status, ex.getMessage());
+                            body.setType(URI.create("traffic:exception"));
+                            body.setTitle(String.valueOf(status));
+
+                            response.sendError(status.value(), mapper.writeValueAsString(body));
+                        }).authenticationEntryPoint((request, response, ex) -> {
+                            var status = HttpStatus.FORBIDDEN;
+                            response.setStatus(status.value());
+                            var body = ProblemDetail.forStatusAndDetail(status, ex.getMessage());
+                            body.setType(URI.create("traffic:exception"));
+                            body.setTitle(String.valueOf(status));
+
+                            response.sendError(status.value(), mapper.writeValueAsString(body));
+                        })
+                );
+
+        return http.build();
     }
-
-
 }

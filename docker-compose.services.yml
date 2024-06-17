@@ -1,0 +1,130 @@
+version: '3.3'
+
+# Вынесение повторяющихся частей
+x-java-entrypoint: &java_entrypoint
+  - java
+  - -XX:InitialRAMPercentage=75
+  - -XX:MaxRAMPercentage=75
+  - -Xss256k
+  - -Dconfig.override_with_env_vars=true
+  - -Djava.security.egd=file:/dev/./urandom
+  - -jar
+
+
+services:
+  tasks-api:
+    container_name: tasks-api
+    restart: on-failure
+    ports:
+      - '8081:8080'
+    depends_on:
+      - pg_tasks
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_CONFIG_LOCATION=/app/application.yml
+    entrypoint: *java_entrypoint
+    command: /app/tasks/api.jar
+
+
+  tasks-watcher:
+    container_name: tasks-watcher
+    restart: on-failure
+    ports:
+      - '8082:8080'
+    depends_on:
+      - pg_tasks
+      - rmq_bff
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_CONFIG_LOCATION=/app/application.yml
+    entrypoint: *java_entrypoint
+    command: /app/tasks/watcher.jar
+
+
+  users-api:
+    container_name: users-api
+    restart: on-failure
+    ports:
+      - '8083:8080'
+    depends_on:
+      - pg_users
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_CONFIG_LOCATION=/app/application.yml
+    entrypoint: *java_entrypoint
+    command: /app/users/api.jar
+
+
+  users-watcher:
+    container_name: users-watcher
+    restart: on-failure
+    ports:
+      - '8084:8080'
+    depends_on:
+      - pg_users
+      - rmq_bff
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_CONFIG_LOCATION=/app/application.yml
+    entrypoint: *java_entrypoint
+    command: /app/users/watcher.jar
+
+
+  notification:
+    container_name: notification
+    restart: on-failure
+    ports:
+      - '8085:8080'
+    depends_on:
+      - pg_notification
+      - rmq_bff
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_CONFIG_LOCATION=/app/application.yml
+    entrypoint: *java_entrypoint
+    command: /app/notification.jar
+
+
+  incidents-api:
+    container_name: incidents-api
+    restart: on-failure
+    ports:
+      - '8086:8080'
+    depends_on:
+      - pg_incidents
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_CONFIG_LOCATION=/app/application.yml
+    entrypoint: *java_entrypoint
+    command: /app/incidents/api.jar
+
+
+  incidents-watcher:
+    container_name: incidents-watcher
+    restart: on-failure
+    ports:
+      - '8087:8080'
+    depends_on:
+      - pg_incidents
+      - rmq_bff
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_CONFIG_LOCATION=/app/application.yml
+    entrypoint: *java_entrypoint
+    command: /app/incidents/watcher.jar
+
+

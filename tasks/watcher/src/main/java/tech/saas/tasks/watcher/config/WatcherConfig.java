@@ -13,5 +13,4 @@ import tech.saas.tasks.core.config.CoreConfig;
 })
 public class WatcherConfig {
 
-
 }
