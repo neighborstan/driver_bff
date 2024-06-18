@@ -1,0 +1,86 @@
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+
+plugins {
+    id 'java-library'
+    id 'org.springframework.boot' version "$springBootVersion" apply false
+    id "org.openapi.generator" version "$openapiGeneratorVersion"
+}
+
+group rootProject.group
+version rootProject.version
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+
+//https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator-gradle-plugin
+//https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/spring.md
+tasks.create("openApiGenerateApi", GenerateTask.class, {
+    generatorName = "spring"
+    inputSpec = "$rootDir/tasks/api.yaml".toString()
+    outputDir = "$buildDir/generated/api".toString()
+    modelPackage = "tech.saas.tasks.core.models"
+    apiPackage = "tech.saas.tasks.core.controllers"
+//    modelNamePrefix = "Api"
+    removeOperationIdPrefix = true
+    skipOperationExample = true
+    skipValidateSpec = true
+    generateModelTests = false
+    generateApiTests = false
+    generateApiDocumentation = false
+    apiFilesConstrainedTo = [""]
+    modelFilesConstrainedTo = [""]
+    configOptions = [
+            dateLibrary         : "java8",
+            useBeanValidation   : "false",
+            sourceFolder        : "src/gen/java",
+            openApiNullable     : "false",
+//            useSpringController    : "true",
+            interfaceOnly       : "true",
+            skipDefaultInterface: "true",
+    ]
+    typeMappings = ['string+period': "Period"]
+    importMappings = [Period: "java.time.Period"]
+})
+
+compileJava.dependsOn tasks.openApiGenerateApi
+
+sourceSets {
+    main {
+        java {
+            srcDirs += "$buildDir/generated/api/src/gen/java"
+        }
+    }
+}
+
+dependencies {
+
+    implementation project(":commons")
+
+    compileOnly "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok"
+    annotationProcessor "org.mapstruct:mapstruct-processor"
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+    implementation "org.postgresql:postgresql"
+    implementation "org.liquibase:liquibase-core"
+
+    implementation "org.springframework:spring-jdbc"
+    implementation "org.springframework.boot:spring-boot-starter-jdbc"
+    implementation "org.springframework.boot:spring-boot-starter-data-jdbc"
+    implementation "org.springframework:spring-web"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    exclude("application.yml")
+}

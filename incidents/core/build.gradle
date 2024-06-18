@@ -1,0 +1,41 @@
+plugins {
+    id 'java-library'
+    id 'org.springframework.boot' version "$springBootVersion" apply false
+    id "org.openapi.generator" version "$openapiGeneratorVersion"
+}
+
+group rootProject.group
+version rootProject.version
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+dependencies {
+
+    implementation project(":commons")
+
+    compileOnly "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok"
+    annotationProcessor "org.mapstruct:mapstruct-processor"
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+    implementation "org.postgresql:postgresql"
+
+    implementation "org.springframework:spring-jdbc"
+    implementation "org.springframework.boot:spring-boot-starter-jdbc"
+    implementation "org.springframework.boot:spring-boot-starter-data-jdbc"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    exclude("application.yml")
+}
