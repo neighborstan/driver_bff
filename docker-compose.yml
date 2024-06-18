@@ -10,8 +10,6 @@ services:
     ports:
       - '5433:5432'
     environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=pass
       - POSTGRES_DB=tasks_db
     healthcheck:
       test: "PGPASSWORD=pass pg_isready -h 127.0.0.1 -U user -d tasks_db"
@@ -25,8 +23,6 @@ services:
     ports:
       - '5434:5432'
     environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=pass
       - POSTGRES_DB=users_db
     healthcheck:
       test: "PGPASSWORD=pass pg_isready -h 127.0.0.1 -U user -d users_db"
@@ -40,8 +36,6 @@ services:
     ports:
       - '5435:5432'
     environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=pass
       - POSTGRES_DB=notification_db
     healthcheck:
       test: "PGPASSWORD=pass pg_isready -h 127.0.0.1 -U user -d notification_db"
@@ -55,11 +49,35 @@ services:
     ports:
       - '5436:5432'
     environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=pass
       - POSTGRES_DB=incidents_db
     healthcheck:
       test: "PGPASSWORD=pass pg_isready -h 127.0.0.1 -U user -d incidents_db"
+
+
+  pg_regulatory:
+    extends:
+      file: docker-compose.base.yml
+      service: pg_base
+    container_name: pg_regulatory
+    ports:
+      - '5437:5432'
+    environment:
+      - POSTGRES_DB=regulatory_db
+    healthcheck:
+      test: "PGPASSWORD=pass pg_isready -h 127.0.0.1 -U user -d regulatory_db"
+
+
+  pg_chat:
+    extends:
+      file: docker-compose.base.yml
+      service: pg_base
+    container_name: pg_chat
+    ports:
+      - '5438:5432'
+    environment:
+      - POSTGRES_DB=chat_db
+    healthcheck:
+      test: "PGPASSWORD=pass pg_isready -h 127.0.0.1 -U user -d chat_db"
 
 
   rmq_bff:

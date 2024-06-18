@@ -4,7 +4,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5436/chat_db
+    url: jdbc:postgresql://localhost:5438/chat_db
     username: user
     password: pass
     driverClassName: org.postgresql.Driver

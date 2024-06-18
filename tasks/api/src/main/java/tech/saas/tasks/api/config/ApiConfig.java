@@ -4,6 +4,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import tech.saas.common.core.config.CommonCoreConfig;
 import tech.saas.tasks.core.config.CoreConfig;
 
 @Configuration
@@ -11,7 +12,7 @@ import tech.saas.tasks.core.config.CoreConfig;
         "tech.saas.tasks.api.controllers",
         "tech.saas.tasks.api.exceptions",
 })
-@Import(CoreConfig.class)
+@Import({CommonCoreConfig.class, CoreConfig.class})
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 public class ApiConfig {
 

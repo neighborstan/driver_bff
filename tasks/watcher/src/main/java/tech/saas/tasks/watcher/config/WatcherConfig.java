@@ -3,10 +3,11 @@ package tech.saas.tasks.watcher.config;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import tech.saas.common.core.config.CommonCoreConfig;
 import tech.saas.tasks.core.config.CoreConfig;
 
 @Configuration
-@Import(CoreConfig.class)
+@Import({CommonCoreConfig.class, CoreConfig.class})
 @ComponentScan({
         "tech.saas.tasks.watcher.config",
         "tech.saas.tasks.watcher.processors"

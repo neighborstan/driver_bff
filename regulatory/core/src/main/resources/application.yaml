@@ -4,7 +4,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5436/regulatory_db
+    url: jdbc:postgresql://localhost:5437/regulatory_db
     username: user
     password: pass
     driverClassName: org.postgresql.Driver

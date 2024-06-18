@@ -12,10 +12,8 @@ java {
     }
 }
 
-
 compileJava.options.encoding = 'UTF-8'
 compileTestJava.options.encoding = 'UTF-8'
-
 
 dependencies {
 
@@ -25,14 +23,7 @@ dependencies {
     compileOnly "org.projectlombok:lombok"
     annotationProcessor "org.projectlombok:lombok"
 
-    implementation "ch.qos.logback:logback-classic"
-    implementation "io.sentry:sentry-logback"
-
-    implementation "com.fasterxml.jackson.core:jackson-core"
-    implementation "com.fasterxml.jackson.core:jackson-databind"
-    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
-
-
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation "org.springframework.boot:spring-boot-starter-amqp"
 }
 

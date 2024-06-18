@@ -1,5 +1,5 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5436/chats_db
+    url: jdbc:postgresql://localhost:5438/chat_db
     username: user
     password: pass
