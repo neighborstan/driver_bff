@@ -29,6 +29,9 @@ buildscript {
         junitVersion = '4.13.2'
         mockserverVersion = '5.11.2'
         mockitoVersion = '4.6.1'
+
+        jacocoVersion = '0.8.12'
+        sonarVersion = '5.0.0.4638'
     }
 
     repositories {
@@ -39,12 +42,11 @@ buildscript {
     dependencies {
         classpath "io.spring.gradle:dependency-management-plugin:$springDependencyManagement"
         classpath "com.gorylenko.gradle-git-properties:gradle-git-properties:$gitPropertiesVersion"
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:$sonarVersion"
     }
-
 }
 
 allprojects {
-
     repositories {
         mavenCentral()
     }
@@ -52,9 +54,9 @@ allprojects {
     apply plugin: 'io.spring.dependency-management'
     apply plugin: "com.gorylenko.gradle-git-properties"
 
+
     dependencyManagement {
         dependencies {
-
             dependency "org.projectlombok:lombok:$lombokVersion"
 
             dependency "ch.qos.logback:logback-classic:$logbackVersion"
@@ -107,14 +109,26 @@ allprojects {
             dependency "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
             dependency "org.mock-server:mockserver-netty:$mockserverVersion"
             dependency "org.mock-server:mockserver-client-java:$mockserverVersion"
-
         }
     }
 }
 
-// для каждого подпроекта проверяем наличие нужных конфигов
-// и добавляем их в testAnnotationProcessor и testCompileOnly при наличии
+
 subprojects {
+
+    apply plugin: 'jacoco'
+    apply plugin: "org.sonarqube"
+
+    sonarqube {
+        properties {
+            // sonar.projectKey: driver_bff:tasks-api, driver_bff:adaptertms и т.п.
+            property "sonar.projectKey", "${rootProject.name}:${project.path.replace(':', '-')}"
+            property "sonar.projectName", "${rootProject.name}:${project.path.replace(':', '-')}"
+        }
+    }
+
+    // для каждого подпроекта проверяем наличие нужных конфигов
+    // и добавляем их в testAnnotationProcessor и testCompileOnly при наличии
     afterEvaluate {
         configurations {
             if (configurations.findByName('annotationProcessor') && configurations.findByName('compileOnly')) {
@@ -129,7 +143,5 @@ subprojects {
     }
 }
 
-
 group 'saas.driver-bff'
 version '1.0.0'
-
