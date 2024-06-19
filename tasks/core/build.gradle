@@ -32,8 +32,8 @@ tasks.create("openApiGenerateApi", GenerateTask.class, {
     generatorName = "spring"
     inputSpec = "$rootDir/tasks/api.yaml".toString()
     outputDir = "$buildDir/generated/api".toString()
-    modelPackage = "tech.saas.tasks.core.models"
-    apiPackage = "tech.saas.tasks.core.controllers"
+    modelPackage = "tech.saas.driver.tasks.core.models"
+    apiPackage = "tech.saas.driver.tasks.core.controllers"
 //    modelNamePrefix = "Api"
     removeOperationIdPrefix = true
     skipOperationExample = true

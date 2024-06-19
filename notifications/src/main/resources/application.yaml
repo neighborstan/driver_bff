@@ -9,4 +9,5 @@ management:
     web:
       exposure:
         include: 'health,mappings'
-
+  server:
+    port: 8081
