@@ -12,6 +12,13 @@ java {
     }
 }
 
+compileJava {
+    options.compilerArgs += [
+        "-Amapstruct.defaultComponentModel=spring",
+        "-Amapstruct.unmappedTargetPolicy=ERROR"
+    ]
+}
+
 compileJava.options.encoding = 'UTF-8'
 compileTestJava.options.encoding = 'UTF-8'
 

@@ -25,6 +25,8 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 test {
@@ -34,8 +36,4 @@ test {
 bootJar {
     archiveFileName = "adaptertms.jar"
     exclude("application.yaml")
-}
-
-test {
-    useJUnitPlatform()
 }

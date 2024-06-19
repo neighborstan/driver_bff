@@ -10,5 +10,5 @@ import tech.saas.common.core.config.CommonCoreConfig;
 @ComponentScan({
         "tech.saas.user.api.config"
 })
-public class UserConfig {
+public class ApiConfig {
 }

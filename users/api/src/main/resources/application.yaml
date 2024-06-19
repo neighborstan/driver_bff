@@ -12,9 +12,6 @@ spring:
           jwk-set-uri: "https://demo.traffic.online/oauth2/jwks"
 
 management:
-#  health:
-#    defaults:
-#      enabled: false
   endpoint:
     health:
       probes:

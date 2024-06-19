@@ -13,6 +13,13 @@ java {
     }
 }
 
+compileJava {
+    options.compilerArgs += [
+        "-Amapstruct.defaultComponentModel=spring",
+        "-Amapstruct.unmappedTargetPolicy=ERROR"
+    ]
+}
+
 compileJava.options.encoding = 'UTF-8'
 compileTestJava.options.encoding = 'UTF-8'
 
@@ -41,6 +48,34 @@ dependencies {
     api 'org.springframework.boot:spring-boot-starter-actuator'
     api 'io.micrometer:micrometer-registry-prometheus'
 }
+
+
+jacoco {
+    toolVersion = "$jacocoVersion"
+}
+
+jacocoTestReport {
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+        csv.required.set(false)
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                '**/*Test.*',
+                '**/generated/**',
+                '**/lombok/**',
+                '**/config/**'
+            ])
+        }))
+    }
+}
+
+tasks.test {
+    finalizedBy jacocoTestReport
+}
+
 
 test {
     useJUnitPlatform()
