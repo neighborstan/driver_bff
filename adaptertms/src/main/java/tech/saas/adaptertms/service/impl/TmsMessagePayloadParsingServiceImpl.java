@@ -42,7 +42,7 @@ public class TmsMessagePayloadParsingServiceImpl implements TmsMessagePayloadPar
 
         switch (tmsMessage.getIBusData().getTypeName()) {
             case USER_ACCOUNT_TYPE_NAME -> {
-                return processUserDataFromIbusData(iBusData);
+                return processUserDataFromIBusData(iBusData);
             }
             default -> throw new TmsMessageParsingException("Сообщение " + iBusData.getRequestUID()
                         + " имеет недопустимый тип '" + iBusData.getMessageKind() + "'");
@@ -61,7 +61,7 @@ public class TmsMessagePayloadParsingServiceImpl implements TmsMessagePayloadPar
         return (TmsMessage) unmarshaller.unmarshal(reader);
     }
 
-    private UserData processUserDataFromIbusData(IBusData iBusData) throws JAXBException {
+    private UserData processUserDataFromIBusData(IBusData iBusData) throws JAXBException {
         if (StringUtils.isEmpty(iBusData.getData())) {
             throw new TmsMessageParsingException("Provided TMS message doesn't contain user data");
         }
