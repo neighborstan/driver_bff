@@ -19,12 +19,21 @@ dependencies {
 
     implementation project(":commons")
 
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    annotationProcessor "org.mapstruct:mapstruct-processor"
+    compileOnly "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "org.apache.commons:commons-lang3"
+    implementation "jakarta.xml.bind:jakarta.xml.bind-api"
+    implementation "org.glassfish.jaxb:jaxb-runtime"
+
+    annotationProcessor "org.mapstruct:mapstruct-processor"
+
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-activemq"
+    implementation "org.springframework.boot:spring-boot-starter-amqp"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
 }
 
 test {
