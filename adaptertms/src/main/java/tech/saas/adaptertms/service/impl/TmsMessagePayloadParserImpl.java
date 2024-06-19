@@ -42,7 +42,7 @@ public class TmsMessagePayloadParserImpl implements TmsMessagePayloadParser {
 
         switch (tmsMessage.getIBusData().getTypeName()) {
             case USER_ACCOUNT_TYPE_NAME -> {
-                return processUserDataFromIBusData(iBusData);
+                return parseUserDataFromIBusData(iBusData);
             }
             default -> throw new TmsMessageParsingException("Сообщение " + iBusData.getRequestUID()
                         + " имеет недопустимый тип '" + iBusData.getMessageKind() + "'");
@@ -61,18 +61,15 @@ public class TmsMessagePayloadParserImpl implements TmsMessagePayloadParser {
         return (TmsMessage) unmarshaller.unmarshal(reader);
     }
 
-    private UserData processUserDataFromIBusData(IBusData iBusData) throws JAXBException {
+    private UserData parseUserDataFromIBusData(IBusData iBusData) throws JAXBException {
         if (StringUtils.isEmpty(iBusData.getData())) {
             throw new TmsMessageParsingException("Provided TMS message doesn't contain user data");
         }
-        String userDataStr = iBusData.getData();
-        String cdataContent = userDataStr.substring(userDataStr.indexOf("<![CDATA[") + "<![CDATA[".length(),
-                userDataStr.indexOf("]]>"));
 
         JAXBContext userDataContext = JAXBContext.newInstance(UserData.class);
         Unmarshaller userUnmarshaller = userDataContext.createUnmarshaller();
 
-        StringReader userDataStringReader = new StringReader(cdataContent);
+        StringReader userDataStringReader = new StringReader(iBusData.getData());
 
         return (UserData) userUnmarshaller.unmarshal(userDataStringReader);
     }

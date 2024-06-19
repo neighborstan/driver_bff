@@ -6,6 +6,6 @@
     <out:senderDateTime>2024-05-15T14:26:56</out:senderDateTime>
     <out:typeName>typeUserPersonalADAccountAccess</out:typeName>
     <out:currentSenderApplication>LISAD</out:currentSenderApplication>
-    <out:data>&lt;![CDATA[&lt;NS1:userPersonalADAccountAccess xmlns:NS1="http://local.dellin.ru/acdc/users/2023/1"&gt;&lt;NS1:userUID&gt;50924320-c4bd-11e1-a38d-001a649655bd&lt;/NS1:userUID&gt;&lt;NS1:userFullName&gt;Гослинг Райан&lt;/NS1:userFullName&gt;&lt;NS1:role&gt;Водитель&lt;/NS1:role&gt;&lt;NS1:phoneNumber&gt;79996661369&lt;/NS1:phoneNumber&gt;&lt;NS1:access&gt;true&lt;/NS1:access&gt;&lt;NS1:deleted&gt;false&lt;/NS1:deleted&gt;&lt;/NS1:userPersonalADAccountAccess&gt;]]&gt;</out:data>
+    <out:data><![CDATA[<NS1:userPersonalADAccountAccess xmlns:NS1="http://local.dellin.ru/acdc/users/2023/1"><NS1:userUID>50924320-c4bd-11e1-a38d-001a649655bd</NS1:userUID><NS1:userFullName>Гослинг Райан</NS1:userFullName><NS1:role>Водитель</NS1:role><NS1:phoneNumber>79996661369</NS1:phoneNumber><NS1:access>true</NS1:access><NS1:deleted>false</NS1:deleted></NS1:userPersonalADAccountAccess>]]></out:data>
   </out:iBusData>
 </out:tmsMessage>
