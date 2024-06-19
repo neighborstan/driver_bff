@@ -20,25 +20,28 @@ import tech.saas.adaptertms.utils.CDATAAdapter;
 })
 @Getter
 public class IBusData {
-    @XmlElement(name = "requestUID", namespace = "http://global.dellin.ru/bus/data-receiving", required = true)
+
+    static final String NAMESPACE = "http://global.dellin.ru/bus/data-receiving";
+
+    @XmlElement(name = "requestUID", namespace = NAMESPACE, required = true)
     private String requestUID;
 
-    @XmlElement(name = "messageKind", namespace = "http://global.dellin.ru/bus/data-receiving", required = true)
+    @XmlElement(name = "messageKind", namespace = NAMESPACE, required = true)
     private String messageKind;
 
-    @XmlElement(name = "sender", namespace = "http://global.dellin.ru/bus/data-receiving", required = true)
+    @XmlElement(name = "sender", namespace = NAMESPACE, required = true)
     private String sender;
 
-    @XmlElement(name = "senderDateTime", namespace = "http://global.dellin.ru/bus/data-receiving", required = true)
+    @XmlElement(name = "senderDateTime", namespace = NAMESPACE, required = true)
     private String senderDateTime;
 
-    @XmlElement(name = "typeName", namespace = "http://global.dellin.ru/bus/data-receiving", required = true)
+    @XmlElement(name = "typeName", namespace = NAMESPACE, required = true)
     private String typeName;
 
-    @XmlElement(name = "currentSenderApplication", namespace = "http://global.dellin.ru/bus/data-receiving", required = true)
+    @XmlElement(name = "currentSenderApplication", namespace = NAMESPACE, required = true)
     private String currentSenderApplication;
 
-    @XmlElement(name = "data", namespace = "http://global.dellin.ru/bus/data-receiving", required = true)
+    @XmlElement(name = "data", namespace = NAMESPACE, required = true)
     @XmlJavaTypeAdapter(CDATAAdapter.class)
     private String data;
 }

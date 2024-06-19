@@ -9,20 +9,20 @@ import org.springframework.lang.NonNull;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Service;
 import tech.saas.adaptertms.entity.tms.payload.TmsPayload;
-import tech.saas.adaptertms.service.TmsMessagePayloadParsingService;
+import tech.saas.adaptertms.service.TmsMessagePayloadParser;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class TmsMessageHandlerService {
+public class TmsMessageHandler {
     private static final String QUEUE_DESTINATION = "${ibm.mq.queue-destination}";
 
-    private final TmsMessagePayloadParsingService tmsMessagePayloadParsingService;
+    private final TmsMessagePayloadParser tmsMessagePayloadParser;
 
     @JmsListener(destination = QUEUE_DESTINATION)
     public void receiveMessage(@NonNull String xmlMessage, @NonNull Session session, @Header(JmsHeaders.MESSAGE_ID) @NonNull String messageId) {
         try {
-            TmsPayload tmsPayload = tmsMessagePayloadParsingService.convertBase64XmlToUserData(xmlMessage);
+            TmsPayload tmsPayload = tmsMessagePayloadParser.convertBase64XmlToUserData(xmlMessage);
             log.info("Получено сообщение: {}", tmsPayload);
             session.commit();
         } catch (Exception e) {

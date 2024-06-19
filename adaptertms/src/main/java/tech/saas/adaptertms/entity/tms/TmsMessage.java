@@ -6,11 +6,15 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 
-@XmlRootElement(name = "tmsMessage", namespace = "http://global.dellin.ru/bus/data-receiving")
+import static tech.saas.adaptertms.entity.tms.TmsMessage.NAMESPACE;
+
+@XmlRootElement(name = "tmsMessage", namespace = NAMESPACE)
 @XmlAccessorType(XmlAccessType.FIELD)
 @Getter
 public class TmsMessage {
 
-    @XmlElement(name = "iBusData", namespace = "http://global.dellin.ru/bus/data-receiving")
+    static final String NAMESPACE = "http://global.dellin.ru/bus/data-receiving";
+
+    @XmlElement(name = "iBusData", namespace = NAMESPACE)
     private IBusData iBusData;
 }

@@ -10,7 +10,7 @@ import tech.saas.adaptertms.entity.tms.TmsMessage;
 import tech.saas.adaptertms.entity.tms.payload.TmsPayload;
 import tech.saas.adaptertms.entity.tms.payload.UserData;
 import tech.saas.adaptertms.exception.TmsMessageParsingException;
-import tech.saas.adaptertms.service.TmsMessagePayloadParsingService;
+import tech.saas.adaptertms.service.TmsMessagePayloadParser;
 import tech.saas.adaptertms.entity.tms.IBusData;
 
 import java.io.StringReader;
@@ -19,7 +19,7 @@ import java.util.Base64;
 
 @Service
 @Slf4j
-public class TmsMessagePayloadParsingServiceImpl implements TmsMessagePayloadParsingService {
+public class TmsMessagePayloadParserImpl implements TmsMessagePayloadParser {
 
     private static final String USER_ACCOUNT_TYPE_NAME = "typeUserPersonalADAccountAccess";
 

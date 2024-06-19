@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import tech.saas.adaptertms.TestUtils;
 import tech.saas.adaptertms.entity.tms.payload.TmsPayload;
 import tech.saas.adaptertms.entity.tms.payload.UserData;
-import tech.saas.adaptertms.service.impl.TmsMessagePayloadParsingServiceImpl;
+import tech.saas.adaptertms.service.impl.TmsMessagePayloadParserImpl;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -13,8 +13,8 @@ import java.util.Base64;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TmsMessagePayloadParsingServiceTest {
-    TmsMessagePayloadParsingService userMessageParsingService = new TmsMessagePayloadParsingServiceImpl();
+class TmsMessagePayloadParserTest {
+    TmsMessagePayloadParser userMessageParsingService = new TmsMessagePayloadParserImpl();
 
     private static final String TEST_MESSAGE_PATH = "service/tms_user_message.xml";
 

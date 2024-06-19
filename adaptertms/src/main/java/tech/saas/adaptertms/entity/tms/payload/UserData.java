@@ -9,27 +9,32 @@ import lombok.Setter;
 
 import java.util.Objects;
 
-@XmlRootElement(name = "userPersonalADAccountAccess", namespace = "http://local.dellin.ru/acdc/users/2023/1")
+import static tech.saas.adaptertms.entity.tms.payload.UserData.NAMESPACE;
+
+@XmlRootElement(name = "userPersonalADAccountAccess", namespace = NAMESPACE)
 @XmlAccessorType(XmlAccessType.FIELD)
 @Getter
 @Setter
 public class UserData implements TmsPayload {
-    @XmlElement(required = true, namespace = "http://local.dellin.ru/acdc/users/2023/1")
+
+    static final String NAMESPACE = "http://local.dellin.ru/acdc/users/2023/1";
+
+    @XmlElement(required = true, namespace = NAMESPACE)
     private String userUID;
 
-    @XmlElement(required = true, namespace = "http://local.dellin.ru/acdc/users/2023/1")
+    @XmlElement(required = true, namespace = NAMESPACE)
     private String userFullName;
 
-    @XmlElement(required = true, namespace = "http://local.dellin.ru/acdc/users/2023/1")
+    @XmlElement(required = true, namespace = NAMESPACE)
     private String role;
 
-    @XmlElement(required = true, namespace = "http://local.dellin.ru/acdc/users/2023/1")
+    @XmlElement(required = true, namespace = NAMESPACE)
     private String phoneNumber;
 
-    @XmlElement(required = true, namespace = "http://local.dellin.ru/acdc/users/2023/1")
+    @XmlElement(required = true, namespace = NAMESPACE)
     private boolean access;
 
-    @XmlElement(required = true, namespace = "http://local.dellin.ru/acdc/users/2023/1")
+    @XmlElement(required = true, namespace = NAMESPACE)
     private boolean deleted;
 
     @Override
