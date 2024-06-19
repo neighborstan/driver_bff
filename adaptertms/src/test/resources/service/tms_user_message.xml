@@ -1,0 +1,11 @@
+<out:tmsMessage xmlns:out="http://global.dellin.ru/bus/data-receiving">
+  <out:iBusData>
+    <out:requestUID>d58dc673-a654-4ba9-a39c-b4d4733d227c</out:requestUID>
+    <out:messageKind>PublishedData</out:messageKind>
+    <out:sender>t-acdc-1C-as-1</out:sender>
+    <out:senderDateTime>2024-05-15T14:26:56</out:senderDateTime>
+    <out:typeName>typeUserPersonalADAccountAccess</out:typeName>
+    <out:currentSenderApplication>LISAD</out:currentSenderApplication>
+    <out:data><![CDATA[<NS1:userPersonalADAccountAccess xmlns:NS1="http://local.dellin.ru/acdc/users/2023/1"><NS1:userUID>50924320-c4bd-11e1-a38d-001a649655bd</NS1:userUID><NS1:userFullName>Гослинг Райан</NS1:userFullName><NS1:role>Водитель</NS1:role><NS1:phoneNumber>79996661369</NS1:phoneNumber><NS1:access>true</NS1:access><NS1:deleted>false</NS1:deleted></NS1:userPersonalADAccountAccess>]]></out:data>
+  </out:iBusData>
+</out:tmsMessage>
