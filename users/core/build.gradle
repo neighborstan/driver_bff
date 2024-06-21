@@ -25,6 +25,8 @@ compileTestJava.options.encoding = 'UTF-8'
 
 dependencies {
 
+    implementation project(":commons")
+
     compileOnly "org.projectlombok:lombok"
     annotationProcessor "org.projectlombok:lombok"
     annotationProcessor "org.mapstruct:mapstruct-processor"

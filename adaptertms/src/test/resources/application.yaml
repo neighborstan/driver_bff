@@ -1,0 +1,6 @@
+services:
+  rabbitmq:
+    exchange: BFF_EXCHANGE
+    routing-key:
+      user: users.driver.create
+

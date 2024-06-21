@@ -15,7 +15,11 @@ spring:
         prefetch: 1
 
 services:
-  rabbit:
-    exchange: TRAFFIC_EXCHANGE
+  rabbitmq:
+    exchange: BFF_EXCHANGE
     queue: USERS-QUEUE
+    routing-keys:
+      - users.driver.create
+    dlq-queue: USERS-QUEUE-DLQ
+    dlq-routing-key: users.driver.dlq
 

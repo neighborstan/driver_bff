@@ -71,6 +71,7 @@ allprojects {
             dependency "org.springframework:spring-webmvc:$springVersion"
 
             dependency "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+            dependency "org.springframework.boot:spring-boot-starter-amqp:$springBootVersion"
 
             dependency "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
             dependency "io.micrometer:micrometer-registry-prometheus:$prometheusVersion"
