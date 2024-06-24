@@ -12,6 +12,13 @@ java {
     }
 }
 
+compileJava {
+    options.compilerArgs += [
+        "-Amapstruct.defaultComponentModel=spring",
+        "-Amapstruct.unmappedTargetPolicy=ERROR"
+    ]
+}
+
 compileJava.options.encoding = 'UTF-8'
 compileTestJava.options.encoding = 'UTF-8'
 
@@ -21,13 +28,12 @@ dependencies {
 
     compileOnly "org.projectlombok:lombok"
     annotationProcessor "org.projectlombok:lombok"
+    annotationProcessor "org.mapstruct:mapstruct-processor"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
     implementation "org.apache.commons:commons-lang3"
     implementation "jakarta.xml.bind:jakarta.xml.bind-api"
     implementation "org.glassfish.jaxb:jaxb-runtime"
-
-    annotationProcessor "org.mapstruct:mapstruct-processor"
 
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-activemq"

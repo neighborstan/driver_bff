@@ -26,9 +26,12 @@ compileTestJava.options.encoding = 'UTF-8'
 dependencies {
 
     compileOnly "org.projectlombok:lombok"
+    compileOnly "org.springframework.boot:spring-boot-starter-amqp"
+
     annotationProcessor "org.projectlombok:lombok"
     annotationProcessor "org.mapstruct:mapstruct-processor"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
 
     api "io.sentry:sentry-logback"
     api "ch.qos.logback:logback-classic"
@@ -47,6 +50,7 @@ dependencies {
 
     api 'org.springframework.boot:spring-boot-starter-actuator'
     api 'io.micrometer:micrometer-registry-prometheus'
+
 }
 
 

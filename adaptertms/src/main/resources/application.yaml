@@ -11,3 +11,10 @@ management:
         include: 'health,mappings'
   server:
     port: 8081
+
+services:
+  rabbitmq:
+    exchange: BFF_EXCHANGE
+    routing-key:
+      user: users.driver.create
+

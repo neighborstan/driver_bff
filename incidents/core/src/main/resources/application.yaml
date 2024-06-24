@@ -14,5 +14,6 @@ spring:
     driverClassName: org.postgresql.Driver
     hikari:
       schema: 'public'
+      autocommit: false
   cache:
     type: simple

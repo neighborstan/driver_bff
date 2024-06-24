@@ -16,6 +16,6 @@ spring:
 
 services:
   rabbit:
-    exchange: TRAFFIC_EXCHANGE
+    exchange: BFF_EXCHANGE
     queue: TASKS-QUEUE
 
