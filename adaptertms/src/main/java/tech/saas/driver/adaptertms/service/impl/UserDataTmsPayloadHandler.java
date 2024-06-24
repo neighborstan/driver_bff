@@ -23,7 +23,7 @@ public class UserDataTmsPayloadHandler implements TmsPayloadHandler<UserData> {
     private final RabbitTemplate rabbitTemplate;
 
     @Value("${services.rabbitmq.exchange}")
-    private String userExchange;
+    private String exchange;
 
     @Value("${services.rabbitmq.routing-key.user}")
     private String userRoutingKey;
@@ -33,7 +33,7 @@ public class UserDataTmsPayloadHandler implements TmsPayloadHandler<UserData> {
     public void handle(UserData payload) {
         UserDomain userDomain = userMapper.toDomain(payload);
         log.info("Отправляем сообщение в очередь: {}", userDomain);
-        UserDomain userDomainResponse = rabbitTemplate.convertSendAndReceiveAsType(userExchange,
+        UserDomain userDomainResponse = rabbitTemplate.convertSendAndReceiveAsType(exchange,
             userRoutingKey,
             userDomain,
             new ParameterizedTypeReference<UserDomain>() {

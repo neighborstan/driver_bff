@@ -14,7 +14,7 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import tech.saas.driver.common.SystemSource;
 import tech.saas.driver.common.core.domain.UserDomain;
-import tech.saas.driver.user.core.service.UserService;
+import tech.saas.driver.user.core.uc.CreateUserUC;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.verify;
 class EventsProcessorTest {
 
     @Mock
-    private UserService userService;
+    private CreateUserUC createUserUC;
 
     @InjectMocks
     private EventsProcessor eventsProcessor;
@@ -31,9 +31,27 @@ class EventsProcessorTest {
     @Captor
     private ArgumentCaptor<UserDomain> userDomainCaptor;
 
+
     @Test
     void testHandleEvent() {
         // Arrange
+        UserDomain userDomain = createUserDomain();
+        Message message = serializeUserDomain(userDomain); //  имитируем сериализацию при помощи Jackson2JsonMessageConverter
+        UserDomain deserializedUserDomain = deserializeUserDomain(message); // имитируем десериализацию при помощи Jackson2JsonMessageConverter
+
+        // Act
+        eventsProcessor.handleEvent(deserializedUserDomain, message.getMessageProperties().getHeaders());
+
+        // Assert
+        verify(createUserUC).create(userDomainCaptor.capture());
+        UserDomain capturedUserDomain = userDomainCaptor.getValue();
+        assertUserDomainsEqual(userDomain, capturedUserDomain);
+        assertEquals("headerValue1", message.getMessageProperties().getHeaders().get("customHeader1"));
+        assertEquals("headerValue2", message.getMessageProperties().getHeaders().get("customHeader2"));
+    }
+
+
+    private UserDomain createUserDomain() {
         UserDomain userDomain = new UserDomain();
         userDomain.setUserUID("testUID");
         userDomain.setUserFullName("Test User");
@@ -42,38 +60,31 @@ class EventsProcessorTest {
         userDomain.setAccess(true);
         userDomain.setDeleted(false);
         userDomain.setSystemSource(SystemSource.TMS);
+        return userDomain;
+    }
 
+    private Message serializeUserDomain(UserDomain userDomain) {
         ObjectMapper objectMapper = new ObjectMapper();
         MessageConverter messageConverter = new Jackson2JsonMessageConverter(objectMapper);
-
-        // Имитируем сериализацию после отправки в очередь
         MessageProperties messageProperties = new MessageProperties();
         messageProperties.setHeader("customHeader1", "headerValue1");
         messageProperties.setHeader("customHeader2", "headerValue2");
-        Message message = messageConverter.toMessage(userDomain, messageProperties);
+        return messageConverter.toMessage(userDomain, messageProperties);
+    }
 
-        // Имитируем десериализацию в лиснере
-        UserDomain deserializedUserDomain = (UserDomain) messageConverter.fromMessage(message);
+    private UserDomain deserializeUserDomain(Message message) {
+        MessageConverter messageConverter = new Jackson2JsonMessageConverter(new ObjectMapper());
+        return (UserDomain) messageConverter.fromMessage(message);
+    }
 
-        // Act
-        eventsProcessor.handleEvent(deserializedUserDomain, message.getMessageProperties().getHeaders());
-
-        // Assert
-        verify(userService).saveUser(userDomainCaptor.capture());
-
-        UserDomain capturedUserDomain = userDomainCaptor.getValue();
-
-        assertEquals(userDomain.getUserUID(), capturedUserDomain.getUserUID());
-        assertEquals(userDomain.getUserFullName(), capturedUserDomain.getUserFullName());
-        assertEquals(userDomain.getRole(), capturedUserDomain.getRole());
-        assertEquals(userDomain.getPhoneNumber(), capturedUserDomain.getPhoneNumber());
-        assertEquals(userDomain.isAccess(), capturedUserDomain.isAccess());
-        assertEquals(userDomain.isDeleted(), capturedUserDomain.isDeleted());
-        assertEquals(userDomain.getSystemSource(), capturedUserDomain.getSystemSource());
-
-        // Проверка заголовков
-        assertEquals("headerValue1", message.getMessageProperties().getHeaders().get("customHeader1"));
-        assertEquals("headerValue2", message.getMessageProperties().getHeaders().get("customHeader2"));
+    private void assertUserDomainsEqual(UserDomain expected, UserDomain actual) {
+        assertEquals(expected.getUserUID(), actual.getUserUID());
+        assertEquals(expected.getUserFullName(), actual.getUserFullName());
+        assertEquals(expected.getRole(), actual.getRole());
+        assertEquals(expected.getPhoneNumber(), actual.getPhoneNumber());
+        assertEquals(expected.isAccess(), actual.isAccess());
+        assertEquals(expected.isDeleted(), actual.isDeleted());
+        assertEquals(expected.getSystemSource(), actual.getSystemSource());
     }
 }
 

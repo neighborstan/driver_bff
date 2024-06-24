@@ -1,6 +1,3 @@
-services:
-  rabbitmq:
-    exchange: BFF_EXCHANGE
-    routing-key:
-      user: users.driver.create
-
+spring:
+  config:
+    import: file:src/main/resources/application.yml

@@ -30,6 +30,8 @@ dependencies {
     annotationProcessor "org.mapstruct:mapstruct-processor"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
+    implementation "org.springframework.boot:spring-boot-starter-amqp"
+
     api "io.sentry:sentry-logback"
     api "ch.qos.logback:logback-classic"
 
@@ -47,6 +49,7 @@ dependencies {
 
     api 'org.springframework.boot:spring-boot-starter-actuator'
     api 'io.micrometer:micrometer-registry-prometheus'
+
 }
 
 

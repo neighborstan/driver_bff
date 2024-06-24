@@ -7,7 +7,7 @@ import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 import tech.saas.driver.common.core.domain.UserDomain;
-import tech.saas.driver.user.core.service.UserService;
+import tech.saas.driver.user.core.uc.CreateUserUC;
 
 import java.util.Map;
 
@@ -17,13 +17,12 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class EventsProcessor {
 
-    private final UserService userService;
+    private final CreateUserUC createUserUC;
 
     @RabbitListener(queues = "${services.rabbitmq.queue}")
     public void handleEvent(@Payload UserDomain userDomain, @Headers Map<String, Object> headers) {
 
-        log.info("Получено сообщение из очереди: {}", userDomain);
-        log.info("Заголовки сообщения: {}", headers);
-        userService.saveUser(userDomain);
+        log.info("Получено сообщение из очереди: {}. Заголовки сообщения: {}", userDomain, headers);
+        createUserUC.create(userDomain);
     }
 }
