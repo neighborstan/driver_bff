@@ -5,15 +5,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
 import org.mockito.junit.jupiter.MockitoExtension;
 import tech.saas.driver.common.SystemSource;
-import tech.saas.driver.common.core.domain.UserDomain;
+import tech.saas.driver.common.core.user.UserDomain;
 import tech.saas.driver.user.core.entity.UserEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
-class UserMapperTest {
+class UserEntityMapperTest {
 
-    private final UserMapper userMapper = Mappers.getMapper(UserMapper.class);
+    private final UserEntityMapper userEntityMapper = Mappers.getMapper(UserEntityMapper.class);
 
     @Test
     void should_mapped_userDomain_to_userEntity_correct() {
@@ -28,7 +28,7 @@ class UserMapperTest {
         userDomain.setSystemSource(SystemSource.TMS);
 
         // Act
-        UserEntity userEntity = userMapper.toEntity(userDomain);
+        UserEntity userEntity = userEntityMapper.toEntity(userDomain);
 
         // Assert
         assertEquals(userDomain.getUserUID(), userEntity.getUserUID());

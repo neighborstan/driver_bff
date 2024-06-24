@@ -5,10 +5,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.data.relational.core.mapping.Column;
 import tech.saas.driver.common.SystemSource;
+import tech.saas.driver.common.scaffold.persistance.IEntity;
 
 @Data
 @Table("users")
-public class UserEntity {
+public class UserEntity implements IEntity {
 
     @Id
     @Column("user_uid")

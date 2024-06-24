@@ -1,15 +1,13 @@
-package tech.saas.driver.common.core.domain;
+package tech.saas.driver.user.api.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import tech.saas.driver.common.SystemSource;
+import tech.saas.driver.common.scaffold.api.IMobileDto;
+import tech.saas.driver.common.scaffold.api.IMobileDtoMapper;
 
-/**
- *  Сущность пользователя для работы с очередью
- */
 @Data
-public class UserDomain {
-
+public class UserMobileDto implements IMobileDto {
     @JsonProperty("userUID")
     private String userUID;
 

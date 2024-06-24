@@ -14,7 +14,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import tech.saas.driver.adaptertms.entity.tms.payload.TmsPayload;
 import tech.saas.driver.adaptertms.entity.tms.payload.UserData;
 import tech.saas.driver.adaptertms.mapper.UserMapper;
-import tech.saas.driver.common.core.domain.UserDomain;
+import tech.saas.driver.common.core.user.UserDomain;
 import tech.saas.driver.adaptertms.service.TmsPayloadHandler;
 
 import java.util.HashMap;
