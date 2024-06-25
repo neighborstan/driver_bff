@@ -1,4 +1,4 @@
-package tech.saas.driver.common.core.notifications;
+package tech.saas.driver.common.core.notification;
 
 import tech.saas.driver.common.scaffold.IDomain;
 
