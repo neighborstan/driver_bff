@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/users")
-public interface UsersPresenter extends IPresenter<UserDomain> {
+public interface UserPresenter extends IPresenter<UserDomain> {
 
     @GetMapping("/")
     List<UserMobileDto> listAll();
