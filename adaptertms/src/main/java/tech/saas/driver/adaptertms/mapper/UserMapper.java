@@ -3,7 +3,7 @@ package tech.saas.driver.adaptertms.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import tech.saas.driver.adaptertms.entity.tms.payload.UserData;
-import tech.saas.driver.common.core.domain.UserDomain;
+import tech.saas.driver.common.core.user.UserDomain;
 
 @Mapper
 public interface UserMapper {

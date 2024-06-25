@@ -13,8 +13,8 @@ import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import tech.saas.driver.common.SystemSource;
-import tech.saas.driver.common.core.domain.UserDomain;
-import tech.saas.driver.user.core.uc.CreateUserUC;
+import tech.saas.driver.common.core.user.UserDomain;
+import tech.saas.driver.user.core.uc.CreateUserUseCase;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.verify;
 class EventsProcessorTest {
 
     @Mock
-    private CreateUserUC createUserUC;
+    private CreateUserUseCase createUserUC;
 
     @InjectMocks
     private EventsProcessor eventsProcessor;

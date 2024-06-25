@@ -6,7 +6,7 @@ import org.mapstruct.factory.Mappers;
 import org.mockito.junit.jupiter.MockitoExtension;
 import tech.saas.driver.adaptertms.entity.tms.payload.UserData;
 import tech.saas.driver.common.SystemSource;
-import tech.saas.driver.common.core.domain.UserDomain;
+import tech.saas.driver.common.core.user.UserDomain;
 
 import static org.junit.jupiter.api.Assertions.*;
 
