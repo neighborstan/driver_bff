@@ -10,20 +10,20 @@ import tech.saas.driver.user.core.repository.UserPersistanceAdapter;
 
 @Repository
 @RequiredArgsConstructor
-class UserJpaPersistanceAdapter implements UserPersistanceAdapter {
+class UserJdbcPersistanceAdapter implements UserPersistanceAdapter {
 
     private final UserEntityMapper userEntityMapper;
-    private final UserJpaRepository userJpaRepository;
+    private final UserJdbcRepository userJdbcRepository;
 
     @Transactional
     public UserDomain save(UserDomain userDomain) {
         UserEntity userEntity = userEntityMapper.toEntity(userDomain);
-        UserEntity save = userJpaRepository.save(userEntity);
+        UserEntity save = userJdbcRepository.save(userEntity);
         return userEntityMapper.fromEntity(save);
     }
 
     @Override
     public Iterable<UserDomain> findAll() {
-        return userEntityMapper.fromEntityList(userJpaRepository.findAll());
+        return userEntityMapper.fromEntities(userJdbcRepository.findAll());
     }
 }

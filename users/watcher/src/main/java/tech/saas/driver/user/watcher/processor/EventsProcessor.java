@@ -21,9 +21,7 @@ public class EventsProcessor {
 
     @RabbitListener(queues = "${services.rabbitmq.queue}")
     public void handleEvent(@Payload UserDomain userDomain, @Headers Map<String, Object> headers) {
-
-        log.info("Получено сообщение из очереди: {}", userDomain);
-        log.info("Заголовки сообщения: {}", headers);
+        log.info("Получено сообщение из очереди: {}. Заголовки сообщения: {}", userDomain, headers);
         createUserUseCase.create(userDomain);
     }
 }

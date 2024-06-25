@@ -6,9 +6,9 @@ public interface IEntityMapper<D extends IDomain, R extends IEntity> {
 
     R toEntity(D userDomain);
 
-    D fromEntity(R userDomain);
+    D fromEntity(R userEntity);
 
-    Iterable<R> toEntityList(Iterable<D> userDomain);
+    Iterable<R> toEntities(Iterable<D> userDomains);
 
-    Iterable<D> fromEntityList(Iterable<R> userDomain);
+    Iterable<D> fromEntities(Iterable<R> userEntities);
 }

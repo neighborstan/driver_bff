@@ -5,7 +5,6 @@ import tech.saas.driver.common.scaffold.persistance.IPersistanceAdapter;
 
 public interface UserPersistanceAdapter extends IPersistanceAdapter<UserDomain> {
 
-
     UserDomain save(UserDomain userDomain);
 
     Iterable<UserDomain> findAll();

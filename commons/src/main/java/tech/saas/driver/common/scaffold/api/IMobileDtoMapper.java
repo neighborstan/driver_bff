@@ -6,9 +6,9 @@ public interface IMobileDtoMapper<D extends IDomain, R extends IMobileDto> {
 
     R toDto(D userDomain);
 
-    D fromDto(R userDomain);
+    D fromDto(R userDto);
 
-    Iterable<R> toDtoList(Iterable<D> userDomain);
+    Iterable<R> toDtos(Iterable<D> userDomains);
 
-    Iterable<D> fromDtoList(Iterable<R> userDomain);
+    Iterable<D> fromDtos(Iterable<R> userDtos);
 }

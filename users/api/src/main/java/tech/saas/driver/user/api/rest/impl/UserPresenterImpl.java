@@ -19,6 +19,6 @@ public class UserPresenterImpl implements UserPresenter {
     @Override
     public List<UserMobileDto> listAll() {
         return StreamSupport.stream(
-            mapper.toDtoList(getUsersInteractor.listAll()).spliterator(), false).toList();
+            mapper.toDtos(getUsersInteractor.listAll()).spliterator(), false).toList();
     }
 }
