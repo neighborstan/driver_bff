@@ -4,11 +4,11 @@ import tech.saas.driver.common.scaffold.IDomain;
 
 public interface IEntityMapper<D extends IDomain, R extends IEntity> {
 
-    R toEntity(D userDomain);
+    R toEntity(D domain);
 
-    D fromEntity(R userEntity);
+    D fromEntity(R entity);
 
-    Iterable<R> toEntities(Iterable<D> userDomains);
+    Iterable<R> toEntities(Iterable<D> domains);
 
-    Iterable<D> fromEntities(Iterable<R> userEntities);
+    Iterable<D> fromEntities(Iterable<R> entities);
 }

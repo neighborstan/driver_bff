@@ -4,11 +4,11 @@ import tech.saas.driver.common.scaffold.IDomain;
 
 public interface IMobileDtoMapper<D extends IDomain, R extends IMobileDto> {
 
-    R toDto(D userDomain);
+    R toDto(D domain);
 
-    D fromDto(R userDto);
+    D fromDto(R dto);
 
-    Iterable<R> toDtos(Iterable<D> userDomains);
+    Iterable<R> toDtos(Iterable<D> domains);
 
-    Iterable<D> fromDtos(Iterable<R> userDtos);
+    Iterable<D> fromDtos(Iterable<R> dtos);
 }
