@@ -9,13 +9,12 @@ import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.stereotype.Component;
 import tech.saas.driver.common.core.user.UserDomain;
 import tech.saas.driver.user.core.config.KeycloakProperties;
-import tech.saas.driver.user.core.exception.KeycloakCreateUserException;
-import tech.saas.driver.user.core.exception.KeycloakRoleNotFound;
-import tech.saas.driver.user.core.exception.KeycloakRoleRepresentationException;
+import tech.saas.driver.user.core.exception.KeycloakException;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -36,23 +35,42 @@ public class KeycloakRestAdminClient implements KeycloakClient {
      * @param userDomain домен пользователя из commons
      */
     @Override
-    public void create(UserDomain userDomain) {
+    public Optional<String> create(UserDomain userDomain) {
         UserRepresentation user = mapUser(userDomain);
         log.info("Создание пользователя в Keycloak с URL: {}, Realm: {}, ClientId: {}",
             keycloakProperties.getUrl(), keycloakProperties.getRealm(), keycloakProperties.getClientId());
+        String userId = null;
         try (Response response = keycloakAdmin.realm(keycloakProperties.getRealm()).users().create(user)) {
             if (!isResponseSuccess(response)) {
                 String responseBody = response.readEntity(String.class);
                 log.error("Создать пользователя не удалось - статус: {}, тело ответа: {}", response.getStatus(), responseBody);
-                throw new KeycloakCreateUserException("Ошибка создания пользователя " + userDomain.getUserUID());
+                throw new KeycloakException("Ошибка создания пользователя " + userDomain.getUserUID());
             } else {
                 log.info("Созданный пользователь {} - {}, {}", userDomain, response.getStatusInfo(), response.getHeaders());
-                String userId = extractUserIdFromResponse(response);
+                userId = extractUserIdFromResponse(response);
                 assignRoleToUser(userId, keycloakProperties.getRole());
             }
         } catch (Exception e) {
             log.error("Произошла ошибка при создании пользователя: ", e);
+            if (userId != null) {
+                delete(userId);
+            }
         }
+        return Optional.ofNullable(userId);
+    }
+
+    @Override
+    public boolean delete(String userId) {
+        boolean result = false;
+        try {
+            log.info("Удаление пользователя {}", userId);
+            keycloakAdmin.realm(keycloakProperties.getRealm()).users().get(userId).remove();
+            log.info("Пользователь {} успешно удален", userId);
+            result = true;
+        } catch (Exception e) {
+            log.error("Не удалось удалить пользователя {}: ", userId, e);
+        }
+        return result;
     }
 
 
@@ -86,6 +104,7 @@ public class KeycloakRestAdminClient implements KeycloakClient {
             log.info("Назначена роль {} пользователю {}", role, userId);
         } catch (Exception e) {
             log.error("Не удалось назначить роль {} пользователю {}.: ", role, userId, e);
+            throw new KeycloakException("Ошибка назначения роли " + role + " пользователю " + userId, e.toString());
         }
     }
 
@@ -98,12 +117,12 @@ public class KeycloakRestAdminClient implements KeycloakClient {
                 .toRepresentation();
             if (roleRepresentation == null) {
                 log.error("Роль {} не найдена в realm {}", role, keycloakProperties.getRealm());
-                throw new KeycloakRoleNotFound("Роль " + role + " не найдена в realm " + keycloakProperties.getRealm());
+                throw new KeycloakException("Роль " + role + " не найдена в realm " + keycloakProperties.getRealm());
             }
             return roleRepresentation;
         } catch (Exception e) {
             log.error("Не удалось получить представление для роли {}: ", role, e);
-            throw new KeycloakRoleRepresentationException("Ошибка получения представления для " + role, e.toString());
+            throw new KeycloakException("Ошибка получения представления для " + role, e.toString());
         }
     }
 

@@ -1,10 +1,8 @@
 --liquibase formatted sql
 --changeset konstantin:2024-06-24-create-users-table
 
-CREATE SEQUENCE users_id_seq;
-
 CREATE TABLE users (
-    id BIGINT DEFAULT nextval('users_id_seq') PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     user_uid TEXT UNIQUE NOT NULL,
     user_full_name TEXT NOT NULL,
     role TEXT NOT NULL,

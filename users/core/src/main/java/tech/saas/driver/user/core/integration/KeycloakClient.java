@@ -2,7 +2,11 @@ package tech.saas.driver.user.core.integration;
 
 import tech.saas.driver.common.core.user.UserDomain;
 
+import java.util.Optional;
+
 public interface KeycloakClient {
 
-    void create(UserDomain userDomain);
+    Optional<String> create(UserDomain userDomain);
+
+    boolean delete(String userId);
 }

@@ -8,6 +8,8 @@ import tech.saas.driver.user.core.integration.KeycloakClient;
 import tech.saas.driver.user.core.repository.UserPersistenceAdapter;
 import tech.saas.driver.user.core.uc.CreateUserUseCase;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class CreateUserUseCaseImpl implements CreateUserUseCase {
@@ -18,8 +20,13 @@ public class CreateUserUseCaseImpl implements CreateUserUseCase {
     @Override
     @Transactional
     public void create(UserDomain userDomain) {
-        keycloakClient.create(userDomain);
-        userStorage.save(userDomain);
+        Optional<String> userId = keycloakClient.create(userDomain);
+        try {
+            userStorage.save(userDomain);
+        } catch (Exception e) {
+            userId.ifPresent(keycloakClient::delete);
+            throw e;
+        }
 
     }
 }
