@@ -39,7 +39,12 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-jdbc"
     implementation "org.springframework.boot:spring-boot-starter-data-jdbc"
 
+    implementation 'org.keycloak:keycloak-admin-client'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.testcontainers:testcontainers'
+    testImplementation 'org.testcontainers:junit-jupiter'
+
 }
 
 test {

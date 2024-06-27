@@ -6,11 +6,12 @@ import org.springframework.transaction.annotation.Transactional;
 import tech.saas.driver.common.core.user.UserDomain;
 import tech.saas.driver.user.core.entity.UserEntity;
 import tech.saas.driver.user.core.mapper.UserEntityMapper;
-import tech.saas.driver.user.core.repository.UserPersistanceAdapter;
+import tech.saas.driver.user.core.repository.UserJdbcRepository;
+import tech.saas.driver.user.core.repository.UserPersistenceAdapter;
 
 @Repository
 @RequiredArgsConstructor
-class UserJdbcPersistanceAdapter implements UserPersistanceAdapter {
+public class UserJdbcPersistenceAdapter implements UserPersistenceAdapter {
 
     private final UserEntityMapper userEntityMapper;
     private final UserJdbcRepository userJdbcRepository;

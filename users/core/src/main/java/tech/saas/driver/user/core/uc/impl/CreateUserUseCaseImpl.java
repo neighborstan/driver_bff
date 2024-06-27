@@ -5,22 +5,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.saas.driver.common.core.user.UserDomain;
 import tech.saas.driver.user.core.integration.KeycloakClient;
-import tech.saas.driver.user.core.repository.UserPersistanceAdapter;
+import tech.saas.driver.user.core.repository.UserPersistenceAdapter;
 import tech.saas.driver.user.core.uc.CreateUserUseCase;
 
 @Service
 @RequiredArgsConstructor
-class CreateUserUseCaseImpl implements CreateUserUseCase {
+public class CreateUserUseCaseImpl implements CreateUserUseCase {
 
-    private final UserPersistanceAdapter userStorage;
+    private final UserPersistenceAdapter userStorage;
     private final KeycloakClient keycloakClient;
 
     @Override
     @Transactional
     public void create(UserDomain userDomain) {
-        userStorage.save(userDomain);
-        //send to kk
         keycloakClient.create(userDomain);
+        userStorage.save(userDomain);
 
     }
 }

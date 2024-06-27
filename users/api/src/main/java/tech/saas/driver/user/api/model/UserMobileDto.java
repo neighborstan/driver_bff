@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import tech.saas.driver.common.SystemSource;
 import tech.saas.driver.common.scaffold.api.IMobileDto;
-import tech.saas.driver.common.scaffold.api.IMobileDtoMapper;
 
 @Data
 public class UserMobileDto implements IMobileDto {
+
     @JsonProperty("userUID")
     private String userUID;
 

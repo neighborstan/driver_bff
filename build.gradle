@@ -24,7 +24,7 @@ buildscript {
         javaxAnnotationVersion = '1.3.2'
         swaggerVersion = '2.2.19'
 
-        testcontainersVersion = '1.17.6'
+        testcontainersVersion = '1.19.8'
         jupiterVersion = '5.8.0'
         junitVersion = '4.13.2'
         mockserverVersion = '5.11.2'
@@ -32,6 +32,8 @@ buildscript {
 
         jacocoVersion = '0.8.12'
         sonarVersion = '5.0.0.4638'
+
+        keycloakVersion = '25.0.1'
     }
 
     repositories {
@@ -101,6 +103,8 @@ allprojects {
             dependency "javax.annotation:javax.annotation-api:$javaxAnnotationVersion"
             dependency "io.swagger.core.v3:swagger-annotations:$swaggerVersion"
 
+            dependency "org.keycloak:keycloak-admin-client:$keycloakVersion"
+
             // test
             dependency "junit:junit:$junitVersion"
             dependency "org.junit.jupiter:junit-jupiter:$jupiterVersion"
@@ -110,6 +114,9 @@ allprojects {
             dependency "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
             dependency "org.mock-server:mockserver-netty:$mockserverVersion"
             dependency "org.mock-server:mockserver-client-java:$mockserverVersion"
+
+           dependency "org.testcontainers:testcontainers:$testcontainersVersion"
+           dependency "org.testcontainers:junit-jupiter:$testcontainersVersion"
         }
     }
 }

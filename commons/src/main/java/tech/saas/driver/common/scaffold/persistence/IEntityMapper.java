@@ -1,4 +1,4 @@
-package tech.saas.driver.common.scaffold.persistance;
+package tech.saas.driver.common.scaffold.persistence;
 
 import tech.saas.driver.common.scaffold.IDomain;
 

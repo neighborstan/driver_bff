@@ -23,7 +23,7 @@ import static org.mockito.Mockito.verify;
 class EventsProcessorTest {
 
     @Mock
-    private CreateUserUseCase createUserUC;
+    private CreateUserUseCase createUserUseCase;
 
     @InjectMocks
     private EventsProcessor eventsProcessor;
@@ -43,7 +43,7 @@ class EventsProcessorTest {
         eventsProcessor.handleEvent(deserializedUserDomain, message.getMessageProperties().getHeaders());
 
         // Assert
-        verify(createUserUC).create(userDomainCaptor.capture());
+        verify(createUserUseCase).create(userDomainCaptor.capture());
         UserDomain capturedUserDomain = userDomainCaptor.getValue();
         assertUserDomainsEqual(userDomain, capturedUserDomain);
         assertEquals("headerValue1", message.getMessageProperties().getHeaders().get("customHeader1"));

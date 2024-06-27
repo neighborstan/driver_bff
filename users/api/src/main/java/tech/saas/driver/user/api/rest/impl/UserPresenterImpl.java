@@ -13,6 +13,7 @@ import java.util.stream.StreamSupport;
 @RequiredArgsConstructor
 @Component
 public class UserPresenterImpl implements UserPresenter {
+
     private final GetUsersUseCase getUsersInteractor;
     private final UserMobileDtoMapper mapper;
 

@@ -17,3 +17,11 @@ spring:
       autocommit: false
   cache:
     type: simple
+
+driver:
+  keycloak:
+    url: http://localhost:8089
+    realm: driver-bff
+    clientId: driver-client-id
+    clientSecret: J86kky97OWXqMvoDUpKHyc2bsxWPjz1c
+    role: driver

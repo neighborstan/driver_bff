@@ -1,9 +1,9 @@
 package tech.saas.driver.user.core.repository;
 
 import tech.saas.driver.common.core.user.UserDomain;
-import tech.saas.driver.common.scaffold.persistance.IPersistanceAdapter;
+import tech.saas.driver.common.scaffold.persistence.IPersistenceAdapter;
 
-public interface UserPersistanceAdapter extends IPersistanceAdapter<UserDomain> {
+public interface UserPersistenceAdapter extends IPersistenceAdapter<UserDomain> {
 
     UserDomain save(UserDomain userDomain);
 

@@ -128,3 +128,14 @@ services:
 #      file: docker-compose.services.yml
 #      service: incidents-watcher
 
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0.1
+    container_name: keycloak-driver
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    ports:
+      - '8089:8080'
+    command: ["start-dev"]
+
